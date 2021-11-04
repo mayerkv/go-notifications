@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+option go_package = "github.com/mayerkv/go-notifications/grpc-service;grpc_service";
+
+service NotificationsService {
+  rpc SendEmail(SendEmailRequest) returns (Empty) {}
+  rpc CreateTemplate(CreateTemplateRequest) returns(CreateTemplateResponse) {}
+  rpc SearchTemplates(SearchTemplatesRequest) returns(SearchTemplatesResponse) {}
+  rpc SearchNotifications(SearchNotificationsRequest) returns (SearchNotificationsResponse) {}
+}
+
+message SendEmailRequest {
+  string email = 1;
+  string templateId = 2;
+  map<string, string> context = 3;
+}
+
+message Empty {}
+
+message CreateTemplateRequest {
+  string name = 1;
+  string template = 2;
+}
+
+message CreateTemplateResponse {
+  string id = 1;
+}
+
+message SearchTemplatesRequest {
+  string name = 1;
+  int32 page = 2;
+  int32 size = 3;
+  OrderBy orderBy = 4;
+  OrderDirection orderDirection = 5;
+
+  enum OrderBy {
+    NAME = 0;
+  }
+}
+
+message SearchTemplatesResponse {
+  repeated Template list = 1;
+  int32 count = 2;
+}
+
+message Template {
+  string id = 1;
+  string name = 2;
+  string template = 3;
+}
+
+enum OrderDirection {
+  ASC = 0;
+  DESC = 1;
+}
+
+message SearchNotificationsRequest {
+  int32 page = 1;
+  int32 size = 2;
+  OrderBy orderBy = 3;
+  OrderDirection orderDirection = 4;
+
+  enum OrderBy {
+    CREATED_AT = 0;
+  }
+}
+
+message SearchNotificationsResponse {
+  repeated Notification list = 1;
+  int32 count = 2;
+}
+
+message Notification {
+  string id = 1;
+  string addressee = 2;
+  string message = 3;
+  Type type = 4;
+  string createdAt = 5;
+
+  enum Type {
+    EMAIL = 0;
+  }
+}
