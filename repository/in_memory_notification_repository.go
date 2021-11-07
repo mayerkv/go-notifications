@@ -40,7 +40,7 @@ func (r *InMemoryNotificationRepository) FindAll(pageable domain.Pageable) (doma
 	r.Lock()
 	defer r.Unlock()
 
-	var notifications = make([]domain.Notification, len(r.items))
+	var notifications = make([]domain.Notification, 0)
 	for _, item := range r.items {
 		notifications = append(notifications, item)
 	}
