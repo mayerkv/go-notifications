@@ -1,7 +1,6 @@
 package grpc_service
 
 import (
-	"fmt"
 	"github.com/mayerkv/go-notifications/domain"
 	"time"
 )
