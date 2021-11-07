@@ -40,7 +40,7 @@ func (r *InMemoryTemplateRepository) FindAll(pageable domain.Pageable) (domain.T
 	r.Lock()
 	defer r.Unlock()
 
-	var templates = make([]domain.Template, len(r.items))
+	var templates = make([]domain.Template, 0)
 	for _, item := range r.items {
 		templates = append(templates, item)
 	}

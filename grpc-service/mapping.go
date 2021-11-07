@@ -1,6 +1,7 @@
 package grpc_service
 
 import (
+	"fmt"
 	"github.com/mayerkv/go-notifications/domain"
 	"time"
 )
@@ -22,7 +23,7 @@ func mapTemplateOrderBy(orderBy SearchTemplatesRequest_OrderBy) string {
 }
 
 func mapTemplates(items []domain.Template) []*Template {
-	var res = make([]*Template, len(items))
+	var res = make([]*Template, 0)
 	for _, item := range items {
 		res = append(res, mapTemplate(item))
 	}
@@ -39,7 +40,7 @@ func mapTemplate(item domain.Template) *Template {
 }
 
 func mapNotifications(items []domain.Notification) []*Notification {
-	var res = make([]*Notification, len(items))
+	var res = make([]*Notification, 0)
 	for _, item := range items {
 		res = append(res, mapNotification(item))
 	}
