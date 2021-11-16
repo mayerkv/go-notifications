@@ -17,7 +17,7 @@ spec:
       containers:
         - name: notifications
           image: kvmayer/go-notifications:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 9090
 ---
